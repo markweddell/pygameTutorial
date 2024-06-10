@@ -11,7 +11,7 @@ size = width, height = 320, 240
 title = "First app"
 
 
-image = 'icon.png'
+image = 'C:\\Users\\mwedd\\Downloads\\icon.png\\icon.png'
 
 
 bg = 36, 36, 36
