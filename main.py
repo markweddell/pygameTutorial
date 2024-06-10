@@ -1,57 +1,33 @@
 import pygame
+from time import sleep
+from random import randrange
 
-from PIL import Image
-import requests
-from io import BytesIO
-
-
-#Initalize Pygame
 pygame.init()
-size = width, height = 320, 240
-title = "First app"
 
+width = pygame.display.Info().current_w
+height = pygame.display.Info().current_h
 
-image = 'C:\\Users\\mwedd\\Downloads\\icon.png\\icon.png'
+screen = pygame.display.set_mode((width, height))
 
+difference = pygame.image.load('spot_the_diff.png')
+difference = pygame.transform.scale(difference, (width, height))
 
-bg = 36, 36, 36
-speed = [0, 0]
+zombie = pygame.image.load('scary_face.png')
+zombie = pygame.transform.scale(zombie, (width, height))
 
-#Create Window with custom title
-window = pygame.display.set_mode(size)
-pygame.display.set_caption(title)
-icon = pygame.image.load(image)
-iconr = icon.get_rect()
+scream = pygame.mixer.Sound("scream.wav")
 
-#Main loop
-run = True
-while run:
-    
-    #Change direction if it reaches the borders
-    if iconr.left<0 or iconr.right>width:
-        speed[0] = -10
-    if iconr.top<0 or iconr.bottom>height:
-        speed[1] = -10
-    
-    #Exit event
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            run = False;
-        if event.type == pygame.KEYDOWN:
-            if event.key == 275: #RIGHT
-                speed[0] = 10
-            if event.key == 276: #LEFT
-                speed[0] = -10
-            if event.key == 273: #UP
-                speed[1] = -10
-            if event.key == 274: #DOWN
-                speed[1] = 10
-    
-    #Move the icon
-    iconr = iconr.move(speed)
-    speed = [0, 0]
+screen.blit(difference, (0, 0))
+pygame.display.update()
 
-    window.fill(bg)
-    window.blit(icon, iconr)
-    pygame.display.flip()
+sleep(randrange(5,15))
+
+screen.blit(zombie, (0,0))
+
+scream.play()
+
+pygame.display.update()
+
+scream.stop()
+
+pygame.quit()
