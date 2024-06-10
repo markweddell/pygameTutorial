@@ -1,17 +1,25 @@
 import pygame
 
+from PIL import Image
+import requests
+from io import BytesIO
+
+
 #Initalize Pygame
 pygame.init()
 size = width, height = 320, 240
 title = "First app"
-image = "icon.png"
+
+
+image = 'icon.png'
+
+
 bg = 36, 36, 36
 speed = [0, 0]
 
 #Create Window with custom title
 window = pygame.display.set_mode(size)
 pygame.display.set_caption(title)
-
 icon = pygame.image.load(image)
 iconr = icon.get_rect()
 
@@ -43,7 +51,7 @@ while run:
     #Move the icon
     iconr = iconr.move(speed)
     speed = [0, 0]
-    
+
     window.fill(bg)
     window.blit(icon, iconr)
     pygame.display.flip()
